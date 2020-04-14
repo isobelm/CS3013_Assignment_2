@@ -31,9 +31,58 @@ h2 {
 	width: 30vw;
 }
 
-.feed {
+.post-section {
 	height: 100%;
 	width: 70vw;
+}
+
+.feed {
+	height: 85.5vh;
+	width: 100%;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.post {
+	background-color: var(--secondary-background-colour);
+	width: 64vw;
+	text-align: left;
+	margin: 2vw;
+	padding: 1vw;
+	border-radius: 10px;
+}
+
+h3 {
+	margin: 0;
+}
+
+.post-input {
+	height: 7.5vh;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: flexbox;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.post-input-form {
+	background-color: var(--secondary-background-colour);
+	width: 100%;
+	display: flexbox;
+	flex-direction: row;
+	align-self: flex-end;
+	align-items: center;
+	justify-content: center;
+
+	height: 100%;
+}
+
+.large-text-area {
+	width: 85%;
+	/* height: 75%; */
 }
 
 .list-title {

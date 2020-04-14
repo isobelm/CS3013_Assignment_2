@@ -79,7 +79,6 @@ api.post("/createUser", (req, res) => {
 			if (err) {
 				console.log("query error");
 			} else {
-				console.log(result);
 				res.status(200).send();
 			}
 		}
@@ -99,7 +98,6 @@ api.post("/removeFollower", (req, res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(result);
 				res.status(200).send();
 			}
 		}
@@ -119,7 +117,6 @@ api.post("/removeDecryptPermissions", (req, res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(result);
 				res.status(200).send();
 			}
 		}
@@ -135,7 +132,6 @@ api.post("/addFollowing", (req, res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(result);
 				res.status(200).send();
 			}
 		}
@@ -151,7 +147,54 @@ api.post("/addDecryptPermissions", (req, res) => {
 			if (err) {
 				console.log(err);
 			} else {
-				console.log(result);
+				res.status(200).send();
+			}
+		}
+	);
+});
+
+api.get("/getPosts", (req, res) => {
+	const username = req.query.username;
+	con.query(
+		"SELECT * " +
+			"FROM Posts " +
+			"JOIN Follows ON Posts.Author = Follows.Following " +
+			"WHERE Follows.Follower = '" +
+			username +
+			"'",
+		function (err, result, fields) {
+			if (err) {
+				console.log("query error");
+			} else {
+				const posts = result.map((entry) => {
+					return {
+						author: entry.Author,
+						text: entry.Encrypted_Text,
+						id: entry.Id,
+					};
+				});
+				res.status(200).send(posts);
+			}
+		}
+	);
+});
+
+api.post("/post", (req, res) => {
+	const text = req.query.text;
+	const author = req.query.author;
+	const id = req.query.id;
+	con.query(
+		"INSERT INTO Posts VALUES ('" +
+			id +
+			"', '" +
+			text +
+			"', '" +
+			author +
+			"')",
+		function (err, result, fields) {
+			if (err) {
+				console.log(err);
+			} else {
 				res.status(200).send();
 			}
 		}

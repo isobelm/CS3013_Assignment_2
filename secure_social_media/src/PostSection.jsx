@@ -1,48 +1,42 @@
 import React, { Component } from "react";
 import "./Userpage.css";
-import UserBlock from "./UserBlock";
 
 class PostSection extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		mode: "setup",
-	// 		username: "",
-	// 		password: "",
-	// 		user: null,
-	// 	};
-	// }
-
-	getFollowing = async () => {
-		const following = await fetch(
-			"http://localhost:3001/getFollowing?username=" + this.props.user,
+	init = async () => {
+		const respose = await fetch(
+			"http://localhost:3001/getPosts?username=" + this.props.user,
 			{
 				method: "GET",
 				headers: { "Content-Type": "application/json" },
 			}
 		);
-		const result = await following.json();
-		return result;
+		const result = await respose.json();
+		debugger;
+		this.setState({ posts: result });
 	};
 
-	getCanDecrypt = async () => {
-		const decryptGroup = await fetch(
-			"http://localhost:3001/getDecryptGroup?username=" + this.props.user,
-			{
-				method: "GET",
-				headers: { "Content-Type": "application/json" },
-			}
-		);
-		const result = await decryptGroup.json();
-		return result;
+	constructor(props) {
+		super(props);
+		this.state = {
+			posts: null,
+			postText: "",
+		};
+		this.init();
+	}
+
+	handleChange = (event) => {
+		this.setState({ postText: event.target.value });
 	};
 
-	async removeFollower() {
+	handleSubmit = async (event) => {
+		event.preventDefault();
 		await fetch(
-			"http://localhost:3001/removeFollower?user=" +
-				this.props.name +
-				"&follower=" +
-				this.props.user,
+			"http://localhost:3001/post?author=" +
+				this.props.user +
+				"&id=" +
+				Math.floor(Math.random() * 2147483647) +
+				"&text=" +
+				this.state.postText,
 			{
 				method: "POST",
 				headers: {
@@ -50,45 +44,47 @@ class PostSection extends Component {
 				},
 			}
 		);
-		this.props.refresh();
-	}
+		this.setState({ postText: "" });
+		this.init();
+	};
 
-	async removeDecryptPermissions() {
-		await fetch(
-			"http://localhost:3001/removeDecryptPermissions?user=" +
-				this.props.name +
-				"&postsBy=" +
-				this.props.user,
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		);
-		this.props.refresh();
-	}
-
-	addDecryptPermissionsURL() {
-		return (
-			"http://localhost:3001/addDecryptPermissions?user=" +
-			this.state.add +
-			"&postsBy=" +
-			this.props.user
-		);
-	}
-
-	addFollowingURL() {
-		return (
-			"http://localhost:3001/addFollowing?user=" +
-			this.state.add +
-			"&follower=" +
-			this.props.user
-		);
-	}
+	getPostItems = () =>
+		this.state.posts.map((post) => (
+			<div className="post">
+				<h3>{post.author}</h3>
+				<p>{post.text}</p>
+			</div>
+		));
 
 	render() {
-		return <div className="post-section"></div>;
+		return (
+			<div className="post-section">
+				<div className="feed">
+					{this.state.posts ? this.getPostItems() : null}
+				</div>
+				<div className="post-input">
+					<form
+						className="post-input-form"
+						onSubmit={this.handleSubmit}
+					>
+						<label>
+							<input
+								className="large-text-area"
+								type="text"
+								name="password"
+								value={this.state.postText}
+								onChange={this.handleChange}
+							/>
+						</label>
+						<input
+							className="user-add-button"
+							type="submit"
+							value="Post"
+						/>
+					</form>
+				</div>
+			</div>
+		);
 	}
 }
 
