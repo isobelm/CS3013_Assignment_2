@@ -4,16 +4,6 @@ import UserBlock from "./UserBlock";
 import PostSection from "./PostSection";
 
 class Userpage extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		mode: "setup",
-	// 		username: "",
-	// 		password: "",
-	// 		user: null,
-	// 	};
-	// }
-
 	getFollowing = async () => {
 		const following = await fetch(
 			"http://localhost:3001/getFollowing?username=" + this.props.user,
@@ -99,7 +89,7 @@ class Userpage extends Component {
 					<div className="sidebar">
 						<UserBlock
 							getData={this.getFollowing}
-							title={"Followers"}
+							title={"Following"}
 							user={this.props.user}
 							remove={this.removeFollower}
 							addURL={this.addFollowingURL}

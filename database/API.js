@@ -156,7 +156,7 @@ api.post("/addDecryptPermissions", (req, res) => {
 api.get("/getPosts", (req, res) => {
 	const username = req.query.username;
 	con.query(
-		"SELECT * " +
+		"SELECT Id, Encrypted_Text, Author " +
 			"FROM Posts " +
 			"JOIN Follows ON Posts.Author = Follows.Following " +
 			"WHERE Follows.Follower = '" +
@@ -183,13 +183,16 @@ api.post("/post", (req, res) => {
 	const text = req.query.text;
 	const author = req.query.author;
 	const id = req.query.id;
+	const key = req.query.key;
 	con.query(
-		"INSERT INTO Posts VALUES ('" +
+		"INSERT INTO Posts (Id, Encrypted_Text, Author, DecryptKey) VALUES ('" +
 			id +
 			"', '" +
 			text +
 			"', '" +
 			author +
+			"', '" +
+			key +
 			"')",
 		function (err, result, fields) {
 			if (err) {
@@ -199,6 +202,28 @@ api.post("/post", (req, res) => {
 			}
 		}
 	);
+});
+
+api.get("/getPostKey", (req, res) => {
+	const username = req.query.username;
+	const id = req.query.id;
+	try {
+		con.query(
+			"SELECT DecryptKey FROM Posts INNER JOIN ( SELECT PostsBy FROM CanDecrypt WHERE User = '" +
+				username +
+				"') as CD ON Posts.Author = CD.PostsBy WHERE id = " +
+				id +
+				";",
+			function (err, result, fields) {
+				if (err) {
+					console.log(err);
+				} else {
+					const key = result.map((entry) => entry.DecryptKey);
+					res.status(200).send(key);
+				}
+			}
+		);
+	} catch (e) {}
 });
 
 api.listen(apiPort);
