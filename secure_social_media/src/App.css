@@ -1,38 +1,95 @@
-.App {
-  text-align: center;
+:root {
+	--accent-colour: #257b7b;
+	--dark-accent-colour: #195555;
+	--light-accent-colour: #a1d7d7;
+	--background-colour: #333;
+	--secondary-background-colour: #484848;
+	text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.homepage,
+.userpage {
+	background-color: var(--background-colour);
+	height: 100vh;
+	color: #fff;
+	display: flex;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+	font-size: 10vh;
+	font-weight: 200;
+	line-height: 12vmin;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.title {
+	background-color: var(--accent-colour);
+	padding-left: 8vh;
+	padding-top: 16vh;
+	padding-bottom: 20vh;
+	text-align: left;
+	width: 25vw;
 }
 
-.App-link {
-  color: #61dafb;
+.login-main-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 75vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.intro-box,
+.login-box {
+	background-color: var(--secondary-background-colour);
+	padding: 4vh;
+	margin-bottom: 15vh;
+	border-radius: 3vmin;
+	display: flex;
+	flex-direction: column;
+	min-height: 25vh;
+	min-width: 25vw;
+}
+
+.intro-box {
+	justify-content: space-around;
+	align-items: center;
+}
+
+.login-box {
+	justify-content: flex-start;
+	align-items: center;
+	text-align: left;
+}
+
+label,
+input {
+	margin: 1vmin;
+	font-size: 2.5vmin;
+}
+
+.small-text-area {
+	width: 20vw;
+}
+
+.login-button,
+input {
+	color: var(--light-accent-colour);
+	background-color: var(--secondary-background-colour);
+	border-radius: 1vmin;
+	padding: 1vmin;
+	border: var(--accent-colour) 3px solid;
+}
+
+.login-button {
+	margin-left: 4vmin;
+	margin-right: 4vmin;
+	min-width: 15vw;
+	min-height: 7vh;
+	font-size: 3vh;
+}
+
+.login-button:hover,
+.user-add-button:hover {
+	cursor: pointer;
+	background-color: #0004;
 }

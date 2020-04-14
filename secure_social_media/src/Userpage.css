@@ -1,0 +1,119 @@
+.userpage {
+	flex-direction: column;
+}
+
+h2 {
+	font-size: 3vh;
+	font-weight: 300;
+	line-height: 2.5vmin;
+	margin: 2vh;
+}
+
+.header {
+	background-color: var(--accent-colour);
+	width: 100vw;
+	height: 7vh;
+	text-align: left;
+}
+
+.user-main-section {
+	display: flex;
+	flex-direction: row;
+	/* justify-content: center;
+	align-items: center; */
+	height: 93vh;
+	width: 100vw;
+}
+
+.sidebar {
+	background-color: var(--secondary-background-colour);
+	height: 100%;
+	width: 30vw;
+}
+
+.feed {
+	height: 100%;
+	width: 70vw;
+}
+
+.list-title {
+	text-align: left;
+	border-color: var(--accent-colour);
+	border-width: 3px 0 3px 0;
+	border-style: solid;
+	padding: 1vmin;
+	height: 3vh;
+	font-size: larger;
+}
+
+.user-add-form {
+	background-color: var(--accent-colour);
+	width: 100%;
+	display: flexbox;
+	flex-direction: row;
+	align-self: flex-end;
+	height: 7.5vh;
+}
+
+.user-list {
+	height: 36.5vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.user-block {
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+}
+
+.user-add-button {
+	margin: 1vmin;
+	align-self: flex-end;
+	width: 5vw;
+}
+
+.user-add-button:hover,
+.user-item-button:hover {
+	background-color: var(--background-colour);
+	cursor: pointer;
+}
+
+.user-item-button:hover {
+	background-color: var(--dark-accent-colour);
+	cursor: pointer;
+}
+
+.user-item {
+	width: 90%;
+	height: 5vh;
+	font-size: medium;
+	display: flex;
+	flex-direction: row;
+	margin: 1vh;
+}
+
+.user-name {
+	width: 70%;
+	height: 100%;
+	background-color: var(--background-colour);
+	border-radius: 8px 0 0 8px;
+	color: var(--light-accent-colour);
+	text-align: left;
+	display: flex;
+	align-items: center;
+	padding-left: 2vh;
+}
+
+.user-item-button {
+	width: 30%;
+	height: 100%;
+	border: none;
+	font-size: medium;
+	background-color: var(--accent-colour);
+	color: #fff;
+	border-radius: 0 8px 8px 0;
+}
