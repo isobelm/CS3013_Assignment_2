@@ -12,6 +12,7 @@ CREATE TABLE Posts
     Id int not null,
     Encrypted_Text varchar(1024) not null,
     Author varchar(255) not null,
+    DecryptKey varchar(255) not null,
     PRIMARY KEY (id),
     FOREIGN KEY (Author) References Users(Username)
 );
